@@ -18,12 +18,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#101215',
     alignItems: 'center',
-    marginTop: 70
+    marginTop: 20,
+    paddingTop: 40
   },
   areaMoeda:{
-
+    backgroundColor: '#fff',
+    width: '90%',
+    padding: 8,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8
   },
   titulo:{
-    
+    fontSize: 16,
+    fontWeight: 500,
+    paddingLeft: 5
   }
 });
