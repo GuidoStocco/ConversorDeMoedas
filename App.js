@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, TextInput, TouchableOpacity } from 'react-native';
 import { useEffect, useState } from 'react';
 import {PickerItem} from './src/Picker'
 import {api} from './src/services/api'
@@ -49,6 +49,20 @@ export default function App() {
           onChange={(moeda) => setMoedaSelecionada(moeda)}
           />
         </View>
+
+        <View style={styles.areaValor}>
+          <Text style={styles.titulo}>Digite um valor para converter em (R$)</Text>
+
+          <TextInput 
+            placeholder='Ex: 1.5'
+            style={styles.input}
+            keyboardType='numeric'
+          />
+        </View>
+
+        <TouchableOpacity style={styles.btn}>
+          <Text style={styles.btnText}>Converter</Text>
+        </TouchableOpacity>
     </View>
   );
 }
@@ -66,7 +80,8 @@ const styles = StyleSheet.create({
     width: '90%',
     padding: 8,
     borderTopLeftRadius: 8,
-    borderTopRightRadius: 8
+    borderTopRightRadius: 8,
+    marginBottom: 1
   },
   titulo:{
     fontSize: 16,
@@ -74,5 +89,32 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     color: '#000',
     fontWeight: '500'
+  },
+  areaValor:{
+    backgroundColor: '#f9f9f9',
+    width: '90%',
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 5
+  },
+  input:{
+    width: '100%',
+    color: '#000',
+    fontSize: 18,
+    padding: 8
+  },
+  btn:{
+    backgroundColor:'#fb4b57',
+    width: '90%',
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5
+  },
+  btnText:{
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold'
   }
 });
