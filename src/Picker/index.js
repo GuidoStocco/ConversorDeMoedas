@@ -1,11 +1,13 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
+import {Picker} from '@react-native-picker/picker';
+
 
 export function PickerItem(){
     return(
-        <View>
-            
-        </View>
+        <Picker>
+            <Picker.Item value='BTC' key={0} label='BTC '/>
+        </Picker>
     );
 };

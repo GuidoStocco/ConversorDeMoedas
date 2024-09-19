@@ -3,13 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import {PickerItem} from './src/Picker'
 
-import {Picker} from '@react-native-picker/picker';
-
 export default function App() {
   return (
     <View style={styles.container}>
         <View style={styles.areaMoeda}>
           <Text style={styles.titulo}>Selecione</Text>
+          <PickerItem/>
         </View>
     </View>
   );
