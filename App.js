@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native';
 
+import {PickerItem} from './src/Picker'
+
 import {Picker} from '@react-native-picker/picker';
 
 export default function App() {
@@ -30,7 +32,9 @@ const styles = StyleSheet.create({
   },
   titulo:{
     fontSize: 16,
-    fontWeight: 500,
-    paddingLeft: 5
+    paddingLeft: 5,
+    paddingTop: 5,
+    color: '#000',
+    fontWeight: '500'
   }
 });
