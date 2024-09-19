@@ -63,6 +63,12 @@ export default function App() {
         <TouchableOpacity style={styles.btn}>
           <Text style={styles.btnText}>Converter</Text>
         </TouchableOpacity>
+
+        <View style={styles.resultado}>
+          <Text style={styles.valorResultado}>3 BTC</Text>
+          <Text style={styles.valorResultado}>valor correspondido a</Text>
+          <Text style={styles.valorResultado}>R$100,00</Text>
+        </View>
     </View>
   );
 }
@@ -116,5 +122,17 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold'
-  }
+  },
+   resultado:{
+    width: '90%',
+    backgroundColor: "#fff",
+    marginTop: 35,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24
+   },
+   valorResultado:{
+
+   }
 });
