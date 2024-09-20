@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, ActivityIndicator, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import { useEffect, useState } from 'react';
 import {PickerItem} from './src/Picker'
 import {api} from './src/services/api'
@@ -9,6 +9,10 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [moedas, setMoedas] = useState([])
   const [moedaSelecionada, setMoedaSelecionada] = useState(null)
+
+  const [moedaBValor, setMoedaBValor] = useState(0)
+  const [valorMoeda, setValorMoeda] = useState(null);
+  const [valorConvertido, setValorConvertido] = useState(0);
 
   useEffect(() => {
     async function loadMoedas(){
@@ -30,6 +34,20 @@ export default function App() {
 
     loadMoedas();
   }, [])
+
+  async function converter(){
+    if(moedaBValor == 0 || moedaBValor == '' || moedaSelecionada == null){
+      return;
+    }
+
+    const response = await api.get(`/all/${moedaSelecionada}-BRL`)
+    let resultado = (response.data[moedaSelecionada].ask * parseFloat(moedaBValor))
+
+    setValorConvertido(resultado.toLocaleString("pt-BR", {style:"currency", currency: 'BRL'}))
+    setValorMoeda(moedaBValor)
+    
+    Keyboard.dismiss()
+  }
 
   if(loading){
     return(
@@ -57,18 +75,23 @@ export default function App() {
             placeholder='Ex: 1.5'
             style={styles.input}
             keyboardType='numeric'
+            value={moedaBValor}
+            onChangeText={(valor) => setMoedaBValor(valor)}
           />
         </View>
 
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={converter}>
           <Text style={styles.btnText}>Converter</Text>
         </TouchableOpacity>
 
-        <View style={styles.resultado}>
-          <Text style={styles.valorResultado}>3 BTC</Text>
-          <Text style={styles.valorResultado}>valor correspondido a</Text>
-          <Text style={styles.valorResultado}>R$100,00</Text>
-        </View>
+        {valorConvertido !== 0 && (
+          <View style={styles.resultado}>
+            <Text style={styles.valorResultado}>{valorMoeda} {moedaSelecionada}</Text>
+            <Text style={{color: '#000', fontSize: 16, fontWeight: '500', margin: 8}}>corresponde a</Text>
+            <Text style={styles.valorResultado}>{valorConvertido}</Text>
+          </View>
+        )}
+
     </View>
   );
 }
@@ -133,6 +156,8 @@ const styles = StyleSheet.create({
     padding: 24
    },
    valorResultado:{
-
+    fontSize: 24,
+    color: '#000',
+    fontWeight: 'bold'
    }
 });
